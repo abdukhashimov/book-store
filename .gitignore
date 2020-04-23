@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 # ignoring vscode generate hidden folder
 .vscode/
+.env.prod
