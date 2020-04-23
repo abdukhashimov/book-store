@@ -20,6 +20,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password=None, *args, **kwargs):
         user = self.create_user(email, password, *args, **kwargs)
         user.is_superuser = True
+        user.is_staff = True
         user.save(using=self._db)
         return user
 
@@ -32,7 +33,8 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
     is_publisher = models.BooleanField(default=False)
     objects = UserManager()
 

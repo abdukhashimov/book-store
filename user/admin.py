@@ -7,15 +7,16 @@ from user.models import User, UserInfo
 
 
 class UserAdmin(BaseUserAdmin):
-    list_display = ('firstname', 'lastname', 'email', 'is_staff')
-    list_filter = ('is_staff',)
+    list_display = ('email', 'is_publisher', 'is_staff')
+    list_filter = ('is_publisher', 'is_staff')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         # (_('Personal Info'),{'fields': ('id', )}),
         (
             _('Permissions'),
             {
-                'fields': ('is_active', 'is_staff', 'is_superuser',)
+                'fields': ('is_active', 'is_publisher',
+                           'is_staff', 'is_superuser',)
             }
         ),
         (_('Important Dates'), {
@@ -24,9 +25,7 @@ class UserAdmin(BaseUserAdmin):
     )
     add_fieldsets = (
         (None, {'classes': ('wide'),
-                'fields': ('firstname',
-                           'lastname',
-                           'email',
+                'fields': ('email',
                            'password1',
                            'password2')
                 }),
